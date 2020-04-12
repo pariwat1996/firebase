@@ -9,6 +9,7 @@ const App = () => {
    
   ])
   const [name, setName] = useState('')
+  const [productid, setProductid] = useState('')
 
   useEffect( () => {
     retriveData()
@@ -18,8 +19,8 @@ const App = () => {
     firestore.collection("tasks").orderBy('id', 'asc').onSnapshot( snapshot => {
       console.log(snapshot)
       let myTask = snapshot.docs.map(d => {
-          const { id, name } = d.data()
-          return {id,name }
+          const { id, name ,productid } = d.data()
+          return {id,name ,productid }
       })
       setTasks(myTask)
     })
@@ -45,7 +46,7 @@ const App = () => {
 
   const addTask = () =>{
     let id = (tasks.length === 0) ? 1 : tasks[tasks.length - 1].id + 1
-       firestore.collection("tasks").doc(id + '').set({ id, name })
+       firestore.collection("tasks").doc(id + '').set({ id, name ,productid})
   }
 
   const deleteTask = (id) =>{
@@ -53,16 +54,19 @@ const App = () => {
   }
 
   const editTask = (id) => {
-    firestore.collection('tasks').doc(id + '').set({id,name})
+    firestore.collection('tasks').doc(id + '').set({id,name,productid})
   }
 
   return (
     <div className='app-container'>
       <h1>Todo</h1>
       <input type="text" name="name" onChange={(e) => setName(e.target.value)} />
+      <input type="number" name="priductid" onChange={(e) => setProductid(e.target.value)} />
       <button style={{margin:'5px'}} onClick={addTask} >Submit</button> 
       <ul style={{ display: 'flex', listStyle: 'none' }} >{ renderTask() }</ul>
+      <div>{Date()}</div>
     </div>
+    
   );
 }
 

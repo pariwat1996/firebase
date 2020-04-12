@@ -17,14 +17,22 @@ li {
   
  .name {
     text-align: center;
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bolder;
     display: flex; 
     justify-content: center;
     align-items: center;
     flex: 1;
  }
-  
+ .productid {
+   text-align: center;
+   font-size: 2em;
+   font-weight: bolder;
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+   flex: 1;
+}
  .bt-container {
     width: 100%;
     display: flex;
